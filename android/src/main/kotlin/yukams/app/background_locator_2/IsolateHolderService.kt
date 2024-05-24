@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Handler
+import android.os.Looper
 import android.os.IBinder
 import android.os.PowerManager
 import android.util.Log
@@ -96,7 +97,7 @@ class IsolateHolderService : MethodChannel.MethodCallHandler, LocationUpdateList
         val notification = getNotification()
         startForeground(notificationId, notification)
 
-        Handler(it.mainLooper).postDelayed( { pluggables.forEach { context?.let { it1 -> it.onServiceStart(it1) } } }, 1000 )// value in milliseconds 
+        Handler(Looper.getMainLooper()).postDelayed( { pluggables.forEach { context?.let { it1 -> it.onServiceStart(it1) } } }, 1000 )// value in milliseconds 
     }
 
     private fun getNotification(): Notification {
