@@ -212,9 +212,7 @@ class BackgroundLocatorPlugin
                 == PackageManager.PERMISSION_GRANTED
             ) {
                 startIsolateService(context, settings)
-            } else {
-                Log.d("BackgroundLocatorPlugin", "Locator service is not start")
-            }
+            } 
         }
     }
 
