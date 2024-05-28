@@ -100,7 +100,7 @@ class BackgroundLocatorPlugin
             val filter = IntentFilter()
             filter.addAction(Intent.ACTION_BOOT_COMPLETED)
             filter.addAction(Intent.ACTION_REBOOT)
-            context.registerReceiver(receiver, filter, Context.RECEIVER_NOT_EXPORTED)
+            context.registerReceiver(receiver, filter, Context.RECEIVER_EXPORTED)
 
             startIsolateService(context, settings)
 
