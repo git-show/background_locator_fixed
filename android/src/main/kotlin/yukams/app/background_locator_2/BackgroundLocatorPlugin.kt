@@ -8,6 +8,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.content.BroadcastReceiver
+import android.content.IntentFilter
 import android.os.Handler
 import android.util.Log
 import androidx.core.content.ContextCompat
@@ -92,7 +93,7 @@ class BackgroundLocatorPlugin
 
             // Register the receiver
             var receiver: BroadcastReceiver = object : BroadcastReceiver() {
-                override fun onReceive(context: Context?, intent: Intent?) {
+                override fun onReceive(context: Context, intent: Intent) {
                     BackgroundLocatorPlugin.registerAfterBoot(context)
                 }
             }
