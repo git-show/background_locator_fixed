@@ -52,7 +52,7 @@ class IsolateHolderService : MethodChannel.MethodCallHandler, LocationUpdateList
 
         @JvmStatic
         var isServiceInitialized = false
-
+        private lateinit var broadcastReceiver: BroadcastReceiver
         fun getBinaryMessenger(context: Context?): BinaryMessenger? {
             val messenger = backgroundEngine?.dartExecutor?.binaryMessenger
             return messenger
@@ -77,7 +77,6 @@ class IsolateHolderService : MethodChannel.MethodCallHandler, LocationUpdateList
     internal lateinit var backgroundChannel: MethodChannel
     internal var context: Context? = null
     private var pluggables: ArrayList<Pluggable> = ArrayList()
-    private lateinit var broadcastReceiver: BroadcastReceiver
 
     override fun onBind(intent: Intent?): IBinder? {
         return null
