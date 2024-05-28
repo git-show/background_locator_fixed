@@ -10,6 +10,10 @@ import android.util.Log
 
 class RebootBroadcastReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
+        Log.d(
+            "RebootBroadcastReceiver", 
+            "Received broadcast: ${intent?.action ?: "null action"}"
+        )
         when (intent.action) {
             Intent.ACTION_REBOOT, Intent.ACTION_BOOT_COMPLETED -> {
                 Log.i("NotificationListener", "Registering notification listener, after reboot!")
