@@ -27,6 +27,7 @@ class BackgroundLocatorPlugin
     : MethodCallHandler, FlutterPlugin, PluginRegistry.NewIntentListener, ActivityAware {
     var context: Context? = null
     private var activity: Activity? = null
+    private var receiver: BroadcastReceiver? = null    
 
     companion object {
         @JvmStatic
