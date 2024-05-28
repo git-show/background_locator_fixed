@@ -89,6 +89,17 @@ class BackgroundLocatorPlugin
                 return
             }
 
+            // Register the receiver
+            receiver = object : BroadcastReceiver() {
+                override fun onReceive(context: Context?, intent: Intent?) {
+                    BackgroundLocatorPlugin.registerAfterBoot(context)
+                }
+            }
+            val filter = IntentFilter()
+            filter.addAction(Intent.ACTION_BOOT_COMPLETED)
+            filter.addAction(Intent.ACTION_REBOOT)
+            context.registerReceiver(receiver, filter, Context.RECEIVER_NOT_EXPORTED)
+
             startIsolateService(context, settings)
 
             // We need to know when the service binded exactly, there is some delay between starting a
