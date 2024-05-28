@@ -2,6 +2,8 @@ package yukams.app.background_locator_2
 
 import android.app.*
 import android.Manifest
+import android.content.BroadcastReceiver
+import android.content.IntentFilter
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ServiceInfo
@@ -43,7 +45,7 @@ class IsolateHolderService : MethodChannel.MethodCallHandler, LocationUpdateList
         var backgroundEngine: FlutterEngine? = null
 
         @JvmStatic
-        private val notificationId = 1
+        private val notificationId = "channel_01"
 
         @JvmStatic
         var isServiceRunning = false
@@ -135,6 +137,19 @@ class IsolateHolderService : MethodChannel.MethodCallHandler, LocationUpdateList
             this,
             1, intent, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
         )
+
+        var broadcastReceiver: BroadcastReceiver = object : BroadcastReceiver() {
+            override fun onReceive(context: Context?, intent: Intent?) {
+                if (intent?.action == "stop_service") {
+                    isServiceRunning = false
+                    shutdownHolderService()
+                }
+            }
+        }
+
+        val filter = IntentFilter()
+        filter.addAction("stop_service")
+        registerReceiver(broadcastReceiver, filter, RECEIVER_EXPORTED)
 
         return NotificationCompat.Builder(this, Keys.CHANNEL_ID)
             .setContentTitle(notificationTitle)
@@ -298,6 +313,7 @@ class IsolateHolderService : MethodChannel.MethodCallHandler, LocationUpdateList
     override fun onDestroy() {
         isServiceRunning = false
         super.onDestroy()
+        unregisterReceiver(broadcastReceiver)
     }
 
 
