@@ -94,7 +94,8 @@ class BackgroundLocatorPlugin
             // Register the receiver
             var receiver: BroadcastReceiver = object : BroadcastReceiver() {
                 override fun onReceive(context: Context, intent: Intent) {
-                    BackgroundLocatorPlugin.registerAfterBoot(context)
+                    Log.i("tsubasa-BroadcastReceiver", "Registering notification listener, after reboot!")
+                    registerAfterBoot(context)
                 }
             }
             val filter = IntentFilter()
