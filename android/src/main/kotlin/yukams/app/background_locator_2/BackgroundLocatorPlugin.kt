@@ -26,8 +26,7 @@ import yukams.app.background_locator_2.pluggables.InitPluggable
 class BackgroundLocatorPlugin
     : MethodCallHandler, FlutterPlugin, PluginRegistry.NewIntentListener, ActivityAware {
     var context: Context? = null
-    private var activity: Activity? = null
-    private var receiver: BroadcastReceiver? = null    
+    private var activity: Activity? = null   
 
     companion object {
         @JvmStatic
@@ -92,7 +91,7 @@ class BackgroundLocatorPlugin
             }
 
             // Register the receiver
-            receiver = object : BroadcastReceiver() {
+            receiver: BroadcastReceiver = object : BroadcastReceiver() {
                 override fun onReceive(context: Context?, intent: Intent?) {
                     BackgroundLocatorPlugin.registerAfterBoot(context)
                 }
