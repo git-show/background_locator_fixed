@@ -77,6 +77,7 @@ class IsolateHolderService : MethodChannel.MethodCallHandler, LocationUpdateList
     internal lateinit var backgroundChannel: MethodChannel
     internal var context: Context? = null
     private var pluggables: ArrayList<Pluggable> = ArrayList()
+    private lateinit var broadcastReceiver: BroadcastReceiver
 
     override fun onBind(intent: Intent?): IBinder? {
         return null
@@ -138,7 +139,7 @@ class IsolateHolderService : MethodChannel.MethodCallHandler, LocationUpdateList
             1, intent, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
         )
 
-        var broadcastReceiver: BroadcastReceiver = object : BroadcastReceiver() {
+        BroadcastReceiver = object : BroadcastReceiver() {
             override fun onReceive(context: Context?, intent: Intent?) {
                 if (intent?.action == "stop_service") {
                     isServiceRunning = false
