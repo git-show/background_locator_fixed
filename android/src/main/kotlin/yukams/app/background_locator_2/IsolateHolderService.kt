@@ -138,7 +138,7 @@ class IsolateHolderService : MethodChannel.MethodCallHandler, LocationUpdateList
             1, intent, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
         )
 
-        BroadcastReceiver = object : BroadcastReceiver() {
+        broadcastReceiver = object : BroadcastReceiver() {
             override fun onReceive(context: Context?, intent: Intent?) {
                 if (intent?.action == "stop_service") {
                     isServiceRunning = false
