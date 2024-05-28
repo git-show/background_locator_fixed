@@ -91,7 +91,7 @@ class BackgroundLocatorPlugin
             }
 
             // Register the receiver
-            receiver: BroadcastReceiver = object : BroadcastReceiver() {
+            var receiver: BroadcastReceiver = object : BroadcastReceiver() {
                 override fun onReceive(context: Context?, intent: Intent?) {
                     BackgroundLocatorPlugin.registerAfterBoot(context)
                 }
