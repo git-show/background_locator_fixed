@@ -45,7 +45,7 @@ class IsolateHolderService : MethodChannel.MethodCallHandler, LocationUpdateList
         var backgroundEngine: FlutterEngine? = null
 
         @JvmStatic
-        private val notificationId = "channel_01"
+        private val notificationId = 1234567890
 
         @JvmStatic
         var isServiceRunning = false
