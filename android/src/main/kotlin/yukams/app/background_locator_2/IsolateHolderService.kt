@@ -102,10 +102,12 @@ class IsolateHolderService : MethodChannel.MethodCallHandler, LocationUpdateList
         // startForeground(notificationId, notification)
         startForegroundService()
 
+        Handler(Looper.getMainLooper()).postDelayed( { pluggables.forEach { context?.let { it1 -> it.onServiceStart(it1) } } }, 1000 )// value in milliseconds 
+/*
         pluggables.forEach {
             context?.let { it1 -> it.onServiceStart(it1) }
         }
-
+*/
         //Handler(Looper.getMainLooper()).postDelayed( { pluggables.forEach { context?.let { it1 -> it.onServiceStart(it1) } } }, 1000 )// value in milliseconds 
     }
 
